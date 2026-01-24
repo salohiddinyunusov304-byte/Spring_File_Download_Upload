@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+}
+
+/* navbar yuqorida qoladi */
+nav {
+    position: sticky; /* xohlasang fixed ham bo‘ladi */
+    top: 0;
+}
+
+/* faqat content markazga tushadi */
+.content {
+    height: calc(100vh - 60px); /* navbar balandligiga qarab */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 48px;
+}
