@@ -2,6 +2,7 @@ package uz.pdp.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +13,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(
+        prePostEnabled = true, // @PreAutorize uchun true bolsin
+        securedEnabled = true,
+        jsr250Enabled = true
+)
+// api larda security ni method levelda check
 public class SpringSecurityConfiguration {
     private final CustomUserDetailService customUserDetailService;
     private final CustomAuthenticatedFailerHandler customAuthenticatedFailerHandler;
@@ -27,6 +34,9 @@ public class SpringSecurityConfiguration {
             "/auth/login",
             "/auth/logout",
             "/auth/homeModel",
+            "/home",
+            "/userinfo",
+            "/test",
             "/css/**",
             "/js/**"
     };
@@ -38,8 +48,8 @@ public class SpringSecurityConfiguration {
                 .userDetailsService(customUserDetailService)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(PUBLIC_URLS).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("user/**").hasAnyRole("ADMIN", "USER")
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("user/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 );
 

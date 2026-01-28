@@ -18,7 +18,7 @@ public class AuthUserDao {
     }
 
     public Integer save(@NonNull AuthUser authUser) {
-        String sql = "insert into auth_user1(username, password, role) values(:username, :password, :role)";
+        String sql = "insert into auth_user(username, password, role) values(:username, :password, :role)";
         var parameterSource = new MapSqlParameterSource()
                 .addValue("username", authUser.getUsername())
                 .addValue("password", authUser.getPassword())
@@ -30,7 +30,7 @@ public class AuthUserDao {
     }
 
     public Optional<AuthUser> findByUsername(@NonNull String username) {
-        String sql = "select id, username, password, role from auth_user1 where username = :username";
+        String sql = "select id, username, password, role from auth_user where username = :username";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("username", username);
@@ -41,7 +41,7 @@ public class AuthUserDao {
                             .id(rs.getInt("id"))
                             .username(rs.getString("username"))
                             .password(rs.getString("password"))
-                            .role(rs.getString("role"))
+//                            .role("USER")
                             .build()
                     ));
         } catch (Exception e) {

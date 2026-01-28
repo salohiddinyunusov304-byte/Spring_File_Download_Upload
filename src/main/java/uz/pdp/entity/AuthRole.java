@@ -10,9 +10,9 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Builder
-public class AuthUser {
+public class AuthRole {
     private Integer id;
-    private String username;
-    private String password;
-    private List<AuthRole> roles;
+    private String name;
+    private String code;
+    private List<AuthPermission> permissions;
 }
