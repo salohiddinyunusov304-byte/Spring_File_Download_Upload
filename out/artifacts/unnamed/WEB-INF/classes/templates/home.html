@@ -13,7 +13,7 @@
     <a class="navbar-brand" href="#" sec:authorize="isAnonymous()">Navbar</a>
     <a class="navbar-brand" href="#" sec:authorize="isAuthenticated()">
       <!--            <span th:text="${#authentication.getName()}"></span>-->
-      <span th:text="${#authentication.name}"></span>
+      <span th:text="${#authentication.principal.authUser}"></span>
 
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

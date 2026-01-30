@@ -8,6 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,7 +22,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan({"uz.pdp", "uz.pdp.config.security", "uz.pdp.dao"})
+@ComponentScan({"uz.pdp", "uz.pdp.dao", "uz.pdp.config"})
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 public class WebMVCConfig implements WebMvcConfigurer {
@@ -81,5 +83,10 @@ public class WebMVCConfig implements WebMvcConfigurer {
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(dataSource());
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 }
